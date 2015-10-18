@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Who Should You Follow?</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="static/main.css">
+	</head>
+	<body>
+		<h1 class="welcome">Welcome</h1>
+	<form action="/results" method="Post" class="input">
+			<div class="form-group">
+				<input autofocus type="text" class="form-control my-form" id="data" placeholder="What would you like to know more about?">
+			</div>
+		</form>
+	</body>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	// Using jQuery.
+
+	$(function() {
+		console.log("hi")
+	    $('form').each(function() {
+	    	console.log("hello")
+	        $(this).find('input').keypress(function(e) {
+	            // Enter pressed?
+	            if(e.which == 10 || e.which == 13) {
+	            	console.log(this.form)
+	                this.form.submit();
+	            }
+	        });
+
+	        $(this).find('input[type=submit]').hide();
+	    });
+	});
+	</script>
+</html>
