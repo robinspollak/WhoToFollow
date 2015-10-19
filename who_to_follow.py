@@ -1,10 +1,12 @@
 from flask import Flask, url_for, render_template,redirect,request,json,jsonify,url_for
 from TwitterAPI import TwitterAPI
+from keys import *
 import os
 
 app = Flask(__name__)
-api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
-os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
+#api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
+#os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
+api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #heroku environment vars
 
 class Tweet():
 	def __init__(self,username,name,verified,followers,tweets,profpic_url):

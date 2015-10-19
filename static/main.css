@@ -18,17 +18,17 @@ body{
 	background-color: rgb(103,198,240);
 
 }
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #000;
+#data::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #000;
+#data:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #fff;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #000;
+#data::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #000;
+#data:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff;
 }
 .twitter-account{
 	border-radius: 15px;
@@ -70,13 +70,28 @@ a{
 	width: 30px;
 	height: 30px;
 }
-#footer{
- 	position: absolute;
-    bottom: 0;
-    margin-left: 10px;
+.footer{
+	position: absolute;
+	bottom: 0;
 }
-#row{
-	text-align: left;
-	display: inline-block !important;
-	color: black !important;
+.item{
+	width: 135px;
+	display: inline-block;
+	color: black;
+	text-align: center;
+}
+.built-by{
+	margin-left: 25px;
+}
+.divider{
+	width: 15px;
+}
+.email{
+	width: 110px;
+}
+.website{
+	width: 110px;
+}
+.github{
+	width: 60px;
 }
