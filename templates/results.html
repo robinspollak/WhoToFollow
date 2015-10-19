@@ -9,24 +9,29 @@
 		<link rel="stylesheet" href="static/main.css">
 	</head>
 	<body>
-		<div class="container">
-			<div class="heading">
-				<h1>You should look into...</h1>
-				<h4>based on followers, verification, and relevance these accounts are worth following:</h4>
-			</div>
-			{%for user in result%}
-			<div class="twitter-account col-md-6">
-				<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
-				<a class="name" href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
-				{%- if (user.verified) -%}
-				<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
-				{%- endif -%}
-				<a class="twitter-follow-button" data-show-count='false'
-				  href="https://twitter.com/{{user.username}}">
-				Follow @{{user.username}}</a>
+		<div id="wrapper">
+			<div class="container content">
+				<div class="heading">
+					<h1>You should look into...</h1>
+					<h4>based on followers, verification, and relevance these accounts are worth following:</h4>
+				</div>
+				{%for user in result%}
+				<div class="twitter-account col-md-6">
+					<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
+					<a class="name" href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
+					{%- if (user.verified) -%}
+					<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
+					{%- endif -%}
+					<a class="twitter-follow-button" data-show-count='false'
+					  href="https://twitter.com/{{user.username}}">
+					Follow @{{user.username}}</a>
 
+				</div>
+				{%endfor%}
 			</div>
-			{%endfor%}
+			<div id="footer">
+				<p>built by Robin Pollak | robin@pollak.io | robin.pollak.io | github.com/robinspollak</p>
+			</div>
 		</div>
 	</body>
 	<!-- Latest compiled and minified JavaScript -->
