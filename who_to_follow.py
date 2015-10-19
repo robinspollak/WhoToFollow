@@ -34,7 +34,6 @@ def buildQuery(listOfStrings):
 	return {'q':query_string,'count':500}
 
 def processResult(dictOfStuff):
-	print str(dictOfStuff[0])
 	list_of_tweets = map(lambda x:Tweet(x['screen_name'],x['name'],x['verified'],\
 		x['followers_count'],x['statuses_count'],x['profile_image_url']),dictOfStuff)
 	only_verified = filter(lambda x: x.verified==True,list_of_tweets)
@@ -77,5 +76,4 @@ def backend():
 
 
 if __name__=='__main__':
-	port = int(os.environ.get("PORT", 5000))
-	app.run(host='0.0.0.0', port=port, debug=True)
+	app.run(debug=True)
