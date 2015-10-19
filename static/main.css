@@ -12,11 +12,15 @@ body{
 	margin-top: 5%;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	border: none;
+	border: 3px solid rgb(105,180,250);
 	box-shadow: none;
+	border-radius: 150px;
 	font-size: 20px;
 	background-color: rgb(103,198,240);
 
+}
+.my-form:focus{
+	outline: none;
 }
 #data::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #fff;
@@ -44,10 +48,11 @@ a{
 	margin-right: 10px;
 }
 .heading{
+	margin-top: 20px;
 	text-align: center;
 	border-bottom: 2px solid white;
-	margin-bottom: 40px;
-	padding-bottom: 40px;
+	margin-bottom: 20px;
+	padding-bottom: 50px;
 }
 .content{
 	border-bottom: 2px solid white;

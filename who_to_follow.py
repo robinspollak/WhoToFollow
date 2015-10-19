@@ -1,12 +1,12 @@
 from flask import Flask, url_for, render_template,redirect,request,json,jsonify,url_for
 from TwitterAPI import TwitterAPI
-#from keys import *
+#from keys import * #for local development
 import os
 
 app = Flask(__name__)
 api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
 os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
-#api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #heroku environment vars
+#api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #for local development
 
 class Tweet():
 	def __init__(self,username,name,verified,followers,tweets,profpic_url):
@@ -52,6 +52,15 @@ def valid(query):
 		return True
 	return False
 
+def handleData(data):
+	if valid(data):
+		query = buildQuery(request.form['hashtags'])
+		result = api.request('users/search',query).json()
+		return processResult(result)
+	else:
+		return redirect(url_for('index'))
+
+
 
 
 
@@ -62,13 +71,8 @@ def index():
 
 @app.route('/results',methods=['POST'])
 def backend():
-	data = request.form['hashtags']
-	if valid(data):
-		query = buildQuery(request.form['hashtags'])
-		result = api.request('users/search',query).json()
-		return processResult(result)
-	else:
-		return redirect(url_for('index'))
+	return handleData(request.form['hashtags'])
+	
 
 	
 
