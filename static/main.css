@@ -76,6 +76,6 @@ a{
     margin-left: 10px;
 }
 #row{
-	display: inline-block;
-	color: black;
+	display: inline-block !important;
+	color: black !important;
 }
