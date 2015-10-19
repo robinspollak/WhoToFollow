@@ -75,3 +75,6 @@ a{
     bottom: 0;
     margin-left: 10px;
 }
+#row{
+	display: inline-block;
+}
