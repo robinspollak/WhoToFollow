@@ -1,5 +1,4 @@
 from flask import Flask, url_for, render_template,redirect,request,json,jsonify,url_for
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from TwitterAPI import TwitterAPI
 from keys import consumer_token,consumer_secret,access_token,access_secret
 import os
