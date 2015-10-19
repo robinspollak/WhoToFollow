@@ -8,7 +8,13 @@ api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
 os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
 #api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #for local development
 
-class Tweet():
+#---------------------------------------------------------------
+# a class for reading in users from the JSON returned by
+# Twitter's search API. Allows for sorting, and easy
+# access to data for relevant list comprehension
+#---------------------------------------------------------------
+
+class User():
 	def __init__(self,username,name,verified,followers,tweets,profpic_url):
 		self.username = username
 		self.name=name
@@ -18,39 +24,56 @@ class Tweet():
 		self.profpic_url = profpic_url
 
 
-	def __repr__(self):
+	def __repr__(self): # for debugging
 		return "username:%s,name:%sverfied:%s,followers:%d,tweets:%d,profpic_url:%s"\
 		%(self.username,self.name,self.verified,self.followers,self.tweets,self.profpic_url)
 
-
-def buildQuery(listOfStrings):
+#---------------------------------------------------------------
+# given a long string of keywords, returns a formatted query
+# that will then be passed to the Twitter API
+#---------------------------------------------------------------
+def buildQuery(all_keywords):
 	first = True
 	query_string = ''
-	for string in listOfStrings.split(" "):
+	for string in all_keywords.split(" "):
 		if first:
 			first = False
 			query_string+=string
 		else:
 			query_string+='+%s'%(string)
-	return {'q':query_string,'count':500}
+	return {'q':query_string,'count':500} # 500 users that fit the keyword combination
 
-def processResult(dictOfStuff):
-	list_of_tweets = map(lambda x:Tweet(x['screen_name'],x['name'],x['verified'],\
-		x['followers_count'],x['statuses_count'],x['profile_image_url']),dictOfStuff)
-	only_verified = filter(lambda x: x.verified==True,list_of_tweets)
-	sorted_by_followers = sorted(list_of_tweets,key=lambda tweet:tweet.followers)
-	if len(sorted_by_followers)>100:
+#---------------------------------------------------------------
+# reads in the list of results into the User class and then
+# sorts by verification, and number of followers and returns
+# some result based on number of suitable results
+#---------------------------------------------------------------
+
+def processResult(dict_of_results):
+	list_of_users = map(lambda x:User(x['screen_name'],x['name'],x['verified'],\
+		x['followers_count'],x['statuses_count'],x['profile_image_url']),dict_of_results)
+	only_verified = filter(lambda x: x.verified==True,list_of_users)
+	sorted_by_followers = sorted(list_of_users,key=lambda tweet:tweet.followers)
+	if len(sorted_by_followers)>100: 
 		result = sorted_by_followers[9*(len(sorted_by_followers)/10):] #top decile
 	elif len(sorted_by_followers)<10:
-		result = sorted_by_followers
+		result = sorted_by_followers # all results, there are less than 10
 	else:
-		result = sorted_by_followers[-10:]
-	return render_template('results.html',result=result[::-1])
+		result = sorted_by_followers[-10:] # return top 10 results
+	return render_template('results.html',result=result[::-1]) # put the list in descending order
 
-def valid(query):
-	if (query.replace(" ","")!=""):
-		return True
-	return False
+#---------------------------------------------------------------
+# makes sure the query isnt empty
+#---------------------------------------------------------------
+
+def valid(query): 
+	return (query.replace(" ","")!="")
+
+#---------------------------------------------------------------
+# gets the data from the API and (if valid) passes it to 
+# buildQuery then hands the API result to processResults
+# otherwise it stays on the home page
+#---------------------------------------------------------------
 
 def handleData(data):
 	if valid(data):
@@ -60,25 +83,14 @@ def handleData(data):
 	else:
 		return redirect(url_for('index'))
 
-
-
-
-
-@app.route('/')
+@app.route('/') #home page
 def index():
 	return render_template("index.html")
 
 
-@app.route('/results',methods=['POST'])
+@app.route('/results',methods=['POST']) #results page
 def backend():
 	return handleData(request.form['hashtags'])
 	
-
-	
-
-
-
-
-
 if __name__=='__main__':
 	app.run(debug=True)
