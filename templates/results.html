@@ -18,7 +18,7 @@
 				{%for user in result%}
 				<div class="twitter-account col-md-6">
 					<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
-					<a class="name" href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
+					<a target="_blank" class="name" href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
 					{%- if (user.verified) -%}
 					<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
 					{%- endif -%}
@@ -32,11 +32,11 @@
 			<div class="footer">
 				<p class = "item built-by">built by Robin Pollak</p>
 				<p class = "item divider"> | </p>
-				<a class = "item email" href="mailto:robin@pollak.io">robin@pollak.io</a>
+				<a class = "item email" target="_blank" href="mailto:robin@pollak.io">robin@pollak.io</a>
 				<p class = "item divider"> | </p>
-				<a class = "item website" href="http://robin.pollak.io">robin.pollak.io</a>
+				<a class = "item website" target="_blank" href="http://robin.pollak.io">robin.pollak.io</a>
 				<p class = "item divider"> | </p>
-				<a class = "item github" href="github.com/robinspollak">github</a>
+				<a class = "item github" target="_blank" href="http://github.com/robinspollak">Github</a>
 			</div>
 		</div>
 	</body>
