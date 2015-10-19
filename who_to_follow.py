@@ -2,6 +2,7 @@ from flask import Flask, url_for, render_template,redirect,request,json,jsonify,
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from TwitterAPI import TwitterAPI
 from keys import consumer_token,consumer_secret,access_token,access_secret
+import os
 
 app = Flask(__name__)
 api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret)
@@ -76,4 +77,5 @@ def backend():
 
 
 if __name__=='__main__':
-	app.run(debug=True)
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host='0.0.0.0', port=port, debug=True)
