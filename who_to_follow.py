@@ -69,6 +69,10 @@ def index():
 
 @app.route('/results', methods=['POST'])
 def submit():
+  """
+  If the user submits a form with a valid topic, we redirect to that topic's
+  page. If they submit an empty POST, we redirect back to the index page.
+  """
   if valid(request.form['hashtags']):
     return redirect('/' + request.form['hashtags'])
   else:
