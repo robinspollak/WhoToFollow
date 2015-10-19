@@ -18,6 +18,14 @@ body{
 	background-color: rgb(103,198,240);
 
 }
+.twitter-account{
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+.heading{
+	text-align: center;
+	border-bottom: 1px solid black;
+}
 .welcome{
 	width:100%;
 	text-align: center;
@@ -26,4 +34,12 @@ body{
 }
 .body:focus{
 	outline: none;
+}
+.prof-pic{
+	width: 55px;
+	height: 55px;
+}
+.verified{
+	width: 30px;
+	height: 30px;
 }

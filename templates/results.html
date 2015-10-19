@@ -1,6 +1,41 @@
-<a class="twitter-timeline" href="https://twitter.com/deray" data-widget-id="655917578091544577"data-tweet-limit="3">Tweets by @deray</a> 
+<!doctype html>
+<html>
+	<head>
+		<title>Who Should You Follow?</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="static/main.css">
+	</head>
+	<body>
+		<div class="heading">
+			<h1>You should look into...</h1>
+			<h4>based on followers, verification, and relevance these accounts are worth following:</h4>
+		</div>
+		{%for user in result%}
+		<div class="twitter-account">
+			<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
+			<a href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
+			{%- if (user.verified) -%}
+			<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
+			{%- endif -%}
 
-
-
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+		{%endfor%}
+		
+	</body>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script>
+	$("input").keypress(function(event) {
+		window.console&&console.log('foo');
+	    if (event.which == 13) {
+	        event.preventDefault();
+	        window.console&&console.log('bar');
+	        $("#input").submit();
+	    }
+	});
+	</script>
+</html>

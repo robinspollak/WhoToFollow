@@ -7,16 +7,18 @@ app = Flask(__name__)
 api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret)
 
 class Tweet():
-	def __init__(self,username,verified,followers,tweets):
+	def __init__(self,username,name,verified,followers,tweets,profpic_url):
 		self.username = username
+		self.name=name
 		self.verified = bool(verified)
 		self.followers = int(followers)
 		self.tweets = int(tweets)
+		self.profpic_url = profpic_url
 
 
 	def __repr__(self):
-		return "username:%s,verfied:%s,followers:%d,tweets:%d"\
-		%(self.username,self.verified,self.followers,self.tweets)
+		return "username:%s,name:%sverfied:%s,followers:%d,tweets:%d,profpic_url:%s"\
+		%(self.username,self.name,self.verified,self.followers,self.tweets,self.profpic_url)
 
 
 def buildQuery(listOfStrings):
@@ -31,18 +33,17 @@ def buildQuery(listOfStrings):
 	return {'q':query_string,'count':500}
 
 def processResult(dictOfStuff):
-	list_of_tweets = map(lambda x:Tweet(x['screen_name'],x['verified'],\
-		x['followers_count'],x['statuses_count']),dictOfStuff)
+	list_of_tweets = map(lambda x:Tweet(x['screen_name'],x['name'],x['verified'],\
+		x['followers_count'],x['statuses_count'],x['profile_image_url']),dictOfStuff)
 	only_verified = filter(lambda x: x.verified==True,list_of_tweets)
 	sorted_by_followers = sorted(list_of_tweets,key=lambda tweet:tweet.followers)
-	print(len(sorted_by_followers))
 	if len(sorted_by_followers)>100:
 		result = sorted_by_followers[9*(len(sorted_by_followers)/10):] #top decile
 	elif len(sorted_by_followers)<10:
 		result = sorted_by_followers
 	else:
 		result = sorted_by_followers[-10:]
-	return str(map(lambda x:(x.username),result))
+	return render_template('results.html',result=result[::-1])
 
 
 
@@ -56,8 +57,8 @@ def index():
 def backend():
 	query = buildQuery(request.form['hashtags'])
 	result = api.request('users/search',query).json()
-	#return processResult(result)
-	return render_template("results.html")
+	return processResult(result)
+	#return render_template("results.html")
 	
 
 
