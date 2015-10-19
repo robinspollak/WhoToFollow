@@ -18,13 +18,31 @@ body{
 	background-color: rgb(103,198,240);
 
 }
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #000;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #000;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #000;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #000;
+}
 .twitter-account{
-	border-bottom: 1px solid black;
-	text-align: center;
+}
+a{
+	color: white;
+}
+.name{
+	margin-right: 10px;
+}
+.verified{
+	margin-right: 10px;
 }
 .heading{
 	text-align: center;
-	border-bottom: 1px solid black;
 }
 .welcome{
 	width:100%;

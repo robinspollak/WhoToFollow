@@ -9,21 +9,25 @@
 		<link rel="stylesheet" href="static/main.css">
 	</head>
 	<body>
-		<div class="heading">
-			<h1>You should look into...</h1>
-			<h4>based on followers, verification, and relevance these accounts are worth following:</h4>
-		</div>
-		{%for user in result%}
-		<div class="twitter-account">
-			<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
-			<a href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
-			{%- if (user.verified) -%}
-			<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
-			{%- endif -%}
+		<div class="container">
+			<div class="heading">
+				<h1>You should look into...</h1>
+				<h4>based on followers, verification, and relevance these accounts are worth following:</h4>
+			</div>
+			{%for user in result%}
+			<div class="twitter-account col-md-6">
+				<img class="prof-pic" src="{{user.profpic_url}}" alt="cant find the photo">
+				<a class="name" href='http://www.twitter.com/{{user.username}}'>{{user.name}} ({{user.username}})</a>
+				{%- if (user.verified) -%}
+				<img class="verified" src="http://orig07.deviantart.net/e7e5/f/2012/279/8/2/verified_account_twitter_png_by_mist_tutorials-d5gzczd.png" alt="verified">
+				{%- endif -%}
+				<a class="twitter-follow-button" data-show-count='false'
+				  href="https://twitter.com/{{user.username}}">
+				Follow @{{user.username}}</a>
 
+			</div>
+			{%endfor%}
 		</div>
-		{%endfor%}
-		
 	</body>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -37,5 +41,22 @@
 	        $("#input").submit();
 	    }
 	});
+	</script>
+	<script>window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+		    t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+		 
+		  t._e = [];
+		  t.ready = function(f) {
+		    t._e.push(f);
+		  };
+		 
+		  return t;
+		}(document, "script", "twitter-wjs"));
 	</script>
 </html>

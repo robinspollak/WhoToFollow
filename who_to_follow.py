@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template,request,json,jsonify
+from flask import Flask, url_for, render_template,redirect,request,json,jsonify,url_for
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from TwitterAPI import TwitterAPI
 from keys import consumer_token,consumer_secret,access_token,access_secret
@@ -33,6 +33,7 @@ def buildQuery(listOfStrings):
 	return {'q':query_string,'count':500}
 
 def processResult(dictOfStuff):
+	print str(dictOfStuff[0])
 	list_of_tweets = map(lambda x:Tweet(x['screen_name'],x['name'],x['verified'],\
 		x['followers_count'],x['statuses_count'],x['profile_image_url']),dictOfStuff)
 	only_verified = filter(lambda x: x.verified==True,list_of_tweets)
@@ -45,6 +46,11 @@ def processResult(dictOfStuff):
 		result = sorted_by_followers[-10:]
 	return render_template('results.html',result=result[::-1])
 
+def valid(query):
+	if (query.replace(" ","")!=""):
+		return True
+	return False
+
 
 
 
@@ -55,10 +61,14 @@ def index():
 
 @app.route('/results',methods=['POST'])
 def backend():
-	query = buildQuery(request.form['hashtags'])
-	result = api.request('users/search',query).json()
-	return processResult(result)
-	#return render_template("results.html")
+	data = request.form['hashtags']
+	if valid(data):
+		query = buildQuery(request.form['hashtags'])
+		result = api.request('users/search',query).json()
+		return processResult(result)
+	else:
+		return redirect(url_for('index'))
+
 	
 
 
