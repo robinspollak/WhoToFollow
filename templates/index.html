@@ -30,10 +30,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script>
 	$("input").keypress(function(event) {
-		window.console&&console.log('foo');
 	    if (event.which == 13) {
 	        event.preventDefault();
-	        window.console&&console.log('bar');
 	        $("#input").submit();
 	    }
 	});
