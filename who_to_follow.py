@@ -1,12 +1,12 @@
 from flask import Flask, url_for, render_template,redirect,request,json,jsonify
 from TwitterAPI import TwitterAPI
-from keys import * #for local development
+#from keys import * #for local development
 import os
 
 app = Flask(__name__)
-#api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
-#os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
-api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #for local development
+api = TwitterAPI(os.environ['CONSUMER_TOKEN'],os.environ['CONSUMER_SECRET'],\
+os.environ['ACCESS_TOKEN'],os.environ['ACCESS_SECRET']) #heroku environment vars
+#api = TwitterAPI(consumer_token,consumer_secret,access_token,access_secret) #for local development
 
 class User():
   """
